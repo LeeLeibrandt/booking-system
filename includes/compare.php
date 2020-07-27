@@ -1,34 +1,34 @@
 <?php
 
-class Compare {
+class Compare{
     
-    public $firstname, $lastname, $email, $indate, $outdate, $cost1, $cost2;
+    public $firstname, $lastname, $email, $indate, $outdate, $hotel1, $hotel2, $cost1, $cost2;
 
-    function __construct($n0,$n1,$n2,$n3,$n4,$n5,$n6) {
+    function __construct($n0, $n1, $n2, $n3, $n4, $n5, $n6){
         $_SESSION['firstname'] = $this->firstname = $n0;
-        $_SESSION['lastname'] = $this->lastname = $n1;
+        $_SESSION['lasetname'] = $this->lastname = $n1;
         $_SESSION['email'] = $this->email = $n2;
         $_SESSION['indate'] = $this->indate = $n3;
         $_SESSION['outdate'] = $this->outdate = $n4;
         $_SESSION['hotel1'] = $this->hotel1 = $n5;
-        $_SESSION['hotel2'] = $this->firstname = $n6;
+        $_SESSION['hotel2'] = $this->hotel2 = $n6;
     }
 
     function daysBooked($param1, $param2){
         $this->indate = $param1;
         $this->outdate = $param2;
-
-        $datatime1 = new Datetime($this->indate);
-        $datatime2 = new Datetime($this->outdate);
-        $interval = $datetime1->diff($datatime2);
-
+      
+        $datetime1 = new DateTime($this->indate);
+        $datetime2 = new DateTime($this->outdate);
+        $interval = $datetime1->diff($datetime2);
+       
         $this->daysBooked = $interval->format('%R%a');
     }
-
+    
     function displayInfo(){
         echo "<br> First Name : " . $this->firstname . "<br>" .
         "Surname : " 
-        . $this->surname . "<br>" . 
+        . $this->lastname . "<br>" . 
         "Start Date : " . $this->indate . "<br>" . 
         "End Date : " . $this->outdate . "<br>" .
         "You are booking for " . $this->daysBooked . "Days<br>" .    
@@ -41,8 +41,8 @@ class Compare {
         <input type=\"radio\" name=\"selectHotel\" value=\"".$this->hotel1."\">".$this->hotel1."<br>"."
         <input type=\"radio\" name=\"selectHotel\" value=\"".$this->hotel2."\">".$this->hotel2."<br>";
     }
-
-    function compareHotles($param){
+    
+    function compareHotels($param){
         echo "
             <table>
                 <tr>
@@ -88,23 +88,11 @@ class Compare {
             </table>
         ";
     }
-
+    
     function bookButton(){
-        echo "
-            <form 
-                class='form-inline' 
-                role='form' 
-                action=" .  htmlspecialchars($_SERVER["PHP_SELF"]). " 
-                method='post'
-            >
-            <button 
-                type=\"submit\" 
-                value=\"book\"
-                >Book</button>
-            </form>
-        ";
+            echo "<form class='form-inline' role='form' action=" .  htmlspecialchars($_SERVER["PHP_SELF"]).  
+            " method='post'>
+            <button type=\"submit\" value=\"book\">Book</button>
+            </form><br><br>";
+        } 
     }
-
-}
-
-//oIBsFvrPmNRLZMHvBmSZ -> server
